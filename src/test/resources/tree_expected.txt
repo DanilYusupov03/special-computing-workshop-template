@@ -1,0 +1,9 @@
+directory/
+|  test1.txt
+|  test2.txt
+|  test_dir/
+|  |  test_dir2.txt
+|  |  test_dir2/
+|  |  |  test_dir3/
+|  |  |  |  test_dir3.txt
+|  |  test_dir1.txt
