@@ -16,7 +16,7 @@ import static java.util.function.Predicate.not;
  */
 public class Task5 {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
     Path textFile = Path.of("src/main/resources/task5/text.txt");
     Path countFile = Path.of("src/main/resources/task5/count.txt");
     Path wordsFolder = Path.of("src/main/resources/task5/words/");
@@ -36,7 +36,7 @@ public class Task5 {
     }
   }
 
-  public static void writeWords(Map<String, Long> wordCount, Path countFile, Path wordsFolder) {
+  public static void writeWords(Map<String, Long> wordCount, Path countFile, Path wordsFolder) throws IOException {
     try (BufferedWriter writer = Files.newBufferedWriter(countFile)) {
       wordCount.forEach((word, count) -> {
         String line = word + " " + count + "\n";
@@ -54,8 +54,6 @@ public class Task5 {
           }
         });
       });
-    } catch (IOException e) {
-      throw new RuntimeException(e);
     }
   }
 }
