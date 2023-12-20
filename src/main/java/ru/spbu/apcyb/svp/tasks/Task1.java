@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 public class Task1 {
 
     private static final Logger logger = Logger.getLogger(Task1.class.getName());
-    private final ArrayList<String> combinations = new ArrayList<>();
 
     /**
      * Method for obtaining the number of banknote combinations of a given amount.
@@ -25,7 +24,7 @@ public class Task1 {
      * @param denominationArr      - array of denominations
      * @return                     - number of combinations
      */
-    public int getCombinations(int sum, int prevDenomination, String combination, Integer[] denominationArr) {
+    public int getCombinations(int sum, int prevDenomination, String combination, Integer[] denominationArr, List<String> combinations) {
         int count = 0;
         if (sum == 0) {
             count++;
@@ -34,7 +33,7 @@ public class Task1 {
         }
         for (int curDenomination : denominationArr) {
             if ((prevDenomination >= curDenomination) && (sum >= curDenomination)) {
-                count += getCombinations(sum - curDenomination, curDenomination, combination + " " + curDenomination + " ", denominationArr);
+                count += getCombinations(sum - curDenomination, curDenomination, combination + " " + curDenomination + " ", denominationArr, combinations);
             }
         }
         return count;
@@ -93,7 +92,7 @@ public class Task1 {
         return value;
     }
 
-    public List<String> getCombinations() {
+    public List<String> getCombinations(List<String> combinations) {
         ArrayList<String> answer = new ArrayList<>(combinations);
         combinations.clear();
         return answer;
@@ -109,10 +108,11 @@ public class Task1 {
     public static void main(String[] args) {
         Task1 obj = new Task1();
         Logger logger = Logger.getLogger(obj.getClass().getName());
+        List<String> combinations = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         String sum = sc.nextLine();
         String nominal = sc.nextLine();
-        String str = String.valueOf(obj.getCombinations(obj.parseSum(sum), obj.parseDenomination(nominal)[0], " ", obj.parseDenomination(nominal)));
+        String str = String.valueOf(obj.getCombinations(obj.parseSum(sum), obj.parseDenomination(nominal)[0], " ", obj.parseDenomination(nominal), combinations));
         logger.info(str);
     }
 }
